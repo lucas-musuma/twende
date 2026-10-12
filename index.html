@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <title>SafariGo - Stay & Ride</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f6f7f9;
+            color: #17202a;
+        }
+
+
+
+        nav {
+            height: 72px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #087f5b;
+        }
+
+        .logo span {
+            color: #111;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .phone {
+            background: #087f5b;
+            color: white !important;
+            padding: 11px 17px;
+            border-radius: 25px;
+        }
+
+
+
+        .hero {
+            min-height: 570px;
+            display: flex;
+            align-items: center;
+            padding: 70px 7%;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(90deg,
+                    rgba(3, 40, 30, .94),
+                    rgba(3, 40, 30, .68),
+                    rgba(3, 40, 30, .20)),
+                linear-gradient(135deg, #087f5b, #f59f00);
+        }
+
+        .hero::after {
+            content: "🏡   🌴   🚗   🏞️";
+            position: absolute;
+            right: 4%;
+            bottom: 40px;
+            font-size: 85px;
+            opacity: .25;
+            letter-spacing: 15px;
+        }
+
+        .hero-content {
+            max-width: 680px;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.05;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #ffd43b;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .primary {
+            background: #ffd43b;
+            color: #111;
+        }
+
+        .secondary {
+            background: white;
+            color: #087f5b;
+        }
+
+
+
+        .booking-wrapper {
+            width: 86%;
+            max-width: 1100px;
+            margin: -55px auto 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .booking-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .15);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .tab {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            background: #edf2f0;
+            color: #333;
+        }
+
+        .tab.active {
+            background: #087f5b;
+            color: white;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #555;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #087f5b;
+        }
+
+        .search-btn {
+            width: 100%;
+            height: 48px;
+            margin-top: 22px;
+            border: none;
+            background: #087f5b;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .search-btn:hover {
+            background: #066b4d;
+        }
+
+
+
+        section {
+            padding: 60px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+            transition: .25s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .12);
+        }
+
+        .card-image {
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 85px;
+            color: white;
+        }
+
+        .house1 {
+            background: linear-gradient(135deg, #087f5b, #74c69d);
+        }
+
+        .house2 {
+            background: linear-gradient(135deg, #e8590c, #ffd43b);
+        }
+
+        .house3 {
+            background: linear-gradient(135deg, #1864ab, #74c0fc);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            margin-bottom: 8px;
+        }
+
+        .location {
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: 800;
+            color: #087f5b;
+            line-height: 1.5;
+        }
+
+        .book-small {
+            float: right;
+            background: #087f5b;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .book-small:hover {
+            background: #066b4d;
+        }
+
+
+
+        .rides {
+            background: #101817;
+            color: white;
+        }
+
+        .rides .section-title p {
+            color: #aaa;
+        }
+
+        .ride-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .ride-card {
+            background: #1c2725;
+            border: 1px solid #30403c;
+            border-radius: 18px;
+            padding: 25px;
+        }
+
+        .car-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .ride-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .ride-card p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .ride-price {
+            margin-top: 15px;
+            color: #ffd43b;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            text-align: center;
+            background: white;
+            padding: 28px 18px;
+            border-radius: 15px;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+            color: #777;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+
+
+        .contact {
+            background: #eaf5f1;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            color: #555;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: bold;
+            transition: .2s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .call-btn {
+            background: #087f5b;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+
+
+        footer {
+            background: #07110e;
+            color: #aaa;
+            padding: 35px 7%;
+            text-align: center;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .65);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-box {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 20px;
+            padding: 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal-box input,
+        .modal-box select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .modal-box label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .close {
+            float: right;
+            border: none;
+            background: transparent;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+
+
+        .floating-whatsapp {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .25);
+            z-index: 300;
+        }
+
+
+
+        @media(max-width: 800px) {
+
+            .nav-links a:not(.phone) {
+                display: none;
+            }
+
+            .hero {
+                min-height: 530px;
+                padding: 50px 6%;
+            }
+
+            .hero::after {
+                font-size: 50px;
+            }
+
+            .booking-wrapper {
+                width: 92%;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cards,
+            .ride-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                gap: 5px;
+            }
+
+            .phone {
+                padding: 9px 12px;
+                font-size: 13px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0 15px;
+            }
+
+            .contact-btn {
+                width: 100%;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+
+
+
+    <head>
+
+    <body>
+
+
+
+        <nav>
+
+            <div class="logo">
+                Safari<span>Go</span>
+            </div>
+
+            <div class="nav-links">
+
+                <a href="#stays">Stays</a>
+
+                <a href="#rides">Rides</a>
+
+                <a href="#contact">Contact</a>
+
+                <a class="phone" href="tel:+254112618748">
+                    📞 Call
+                </a>
+
+            </div>
+
+        </nav>
+
+
+
+        <header class="hero">
+
+            <div class="hero-content">
+
+                <h1>
+                    Stay somewhere
+                    <span>amazing.</span><br>
+                    Get there easily.
+                </h1>
+
+                <p>
+                    Book beautiful accommodation and reliable rides
+                    from one simple platform. Explore Kenya, find a
+                    comfortable place to stay and get a ride to your destination.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="btn primary" onclick="scrollToSection('stays')">
+                        🏠 Find a Stay
+                    </button>
+
+                    <button class="btn secondary" onclick="scrollToSection('rides')">
+                        🚗 Book a Ride
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <div class="booking-wrapper">
+
+            <div class="booking-box">
+
+                <div class="tabs">
+
+                    <button class="tab active" onclick="showStay()">
+                        🏠 Accommodation
+                    </button>
+
+                    <button class="tab" onclick="showRide()">
+                        🚗 Ride
+                    </button>
+
+                </div>
+
+
+
+                <div id="stayForm">
+
+                    <div class="form-grid">
+
+                        <div class="input-group">
+
+                            <label>WHERE</label>
+
+                            <input id="destination" type="text" placeholder="e.g. Kisii">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>CHECK IN</label>
+
+                            <input type="date" id="checkin">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>CHECK OUT</label>
+
+                            <input type="date" id="checkout">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>GUESTS</label>
+
+                            <select id="guests">
+
+                                <option>1 guest</option>
+                                <option>2 guests</option>
+                                <option>3 guests</option>
+                                <option>4 guests</option>
+                                <option>5+ guests</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <button class="search-btn" onclick="searchStays()">
+
+                        🔎 Search Accommodation
+
+                    </button>
+
+                </div>
+
+
+
+                <div id="rideForm" style="display:none;">
+
+                    <div class="form-grid">
+
+                        <div class="input-group">
+
+                            <label>PICKUP</label>
+
+                            <input id="pickup" type="text" placeholder="Pickup location">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>DESTINATION</label>
+
+                            <input id="dropoff" type="text" placeholder="Where are you going?">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>DATE</label>
+
+                            <input type="date" id="rideDate">
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label>PASSENGERS</label>
+
+                            <select id="passengers">
+
+                                <option>1 passenger</option>
+                                <option>2 passengers</option>
+                                <option>3 passengers</option>
+                                <option>4 passengers</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <button class="search-btn" onclick="bookRide()">
+
+                        🚗 Find a Ride
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <section id="stays">
+
+            <div class="section-title">
+
+                <h2>Popular places to stay</h2>
+
+                <p>
+                    Comfortable stays for business, holidays and adventures.
+                </p>
+
+            </div>
+
+            <div class="cards">
+
+
+
+                <div class="card">
+
+                    <div class="card-image house1">
+                        🏡
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3>Lucky Resort</h3>
+
+                        <p class="location">
+                            📍 Kegonga, Kenya
+                        </p>
+
+                        <span class="price">
+                            <br> KSh 4,500 / night</br>
+                            KSh 2,500 / day
+                        </span>
+
+                        <button class="book-small" onclick="openBooking('Lucky Resort')">
+
+                            Book
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- LUCKY GARDEN -->
+
+                <div class="card">
+
+                    <div class="card-image house2">
+                        🏨
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3>Lucky Garden Apartment</h3>
+
+                        <p class="location">
+                            📍 Migori, Kenya
+                        </p>
+
+                        <span class="price">
+                            <br> KSh 6,000 / night</br>
+                            KSh 4,500 / day
+                        </span>
+
+                        <button class="book-small" onclick="openBooking('Lucky Garden Apartment')">
+
+                            Book
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="card-image house3">
+                        🌴
+                    </div>
+
+                    <div class="card-content">
+
+                        <h3>Lake View Cottage</h3>
+
+                        <p class="location">
+                            📍 Kisumu, Kenya
+                        </p>
+
+                        <span class="price">
+                            <br> KSh 5,200 / night</br>
+                            KSh 4,500 / day
+                        </span>
+
+                        <button class="book-small" onclick="openBooking('Lake View Cottage')">
+
+                            Book
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="rides" id="rides">
+
+            <div class="section-title">
+
+                <h2>Choose your ride</h2>
+
+                <p>
+                    Simple, convenient transportation to your destination.
+                </p>
+
+            </div>
+
+            <div class="ride-cards">
+
+
+
+                <div class="ride-card">
+
+                    <div class="car-icon">
+                        🚗
+                    </div>
+
+                    <h3>Economy</h3>
+
+                    <p>
+                        Affordable everyday rides for one or more passengers.
+                    </p>
+
+                    <div class="ride-price">
+                        From KSh 250
+                    </div>
+
+                    <button class="search-btn" onclick="openRide('Economy')">
+
+                        Book Economy
+
+                    </button>
+
+                </div>
+
+
+
+                <div class="ride-card">
+
+                    <div class="car-icon">
+                        🚘
+                    </div>
+
+                    <h3>Comfort</h3>
+
+                    <p>
+                        A more comfortable vehicle for longer journeys.
+                    </p>
+
+                    <div class="ride-price">
+                        From KSh 450
+                    </div>
+
+                    <button class="search-btn" onclick="openRide('Comfort')">
+
+                        Book Comfort
+
+                    </button>
+
+                </div>
+
+                <!-- FAMILY -->
+
+                <div class="ride-card">
+
+                    <div class="car-icon">
+                        🚙
+                    </div>
+
+                    <h3>Family</h3>
+
+                    <p>
+                        Spacious rides suitable for families and groups.
+                    </p>
+
+                    <div class="ride-price">
+                        From KSh 650
+                    </div>
+
+                    <button class="search-btn" onclick="openRide('Family')">
+
+                        Book Family
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section>
+
+            <div class="section-title">
+
+                <h2>Why use SafariGo?</h2>
+
+            </div>
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🏡
+                    </div>
+
+                    <h3>Great Stays</h3>
+
+                    <p>
+                        Find comfortable places for your trip.
+                    </p>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🚗
+                    </div>
+
+                    <h3>Easy Rides</h3>
+
+                    <p>
+                        Request a ride whenever you need one.
+                    </p>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    <h3>Safe Booking</h3>
+
+                    <p>
+                        Keep your booking information organized.
+                    </p>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🇰🇪
+                    </div>
+
+                    <h3>Made for Kenya</h3>
+
+                    <p>
+                        Designed around Kenyan travelers and destinations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="contact" id="contact">
+
+            <h2>
+                Need help with your booking?
+            </h2>
+
+            <p>
+                Call or WhatsApp us and our team will help you.
+            </p>
+
+            <div class="contact-buttons">
+
+                <!-- CALL -->
+
+                <a class="contact-btn call-btn" href="tel:+254112618748">
+
+                    📞 Call SafariGo
+
+                </a>
+
+
+
+                <a class="contact-btn whatsapp-btn"
+                    href="https://wa.me/254112618748?text=Hello%20SafariGo,%20I%20would%20like%20help%20with%20a%20booking."
+                    target="_blank">
+
+                    💬 WhatsApp SafariGo
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <footer>
+
+            <p>
+                © 2026 <strong>SafariGo</strong>.
+                Stay. Ride. Explore. Enjoy.
+            </p>
+
+            <p style="margin-top:10px;">
+                Contact: +254 112 618 748
+            </p>
+
+        </footer>
+
+
+
+        <div class="modal" id="bookingModal">
+
+            <div class="modal-box">
+
+                <button class="close" onclick="closeModal()">
+
+                    ×
+
+                </button>
+
+                <h2>
+                    Book your stay
+                </h2>
+
+                <p id="selectedProperty" style="margin-bottom:20px;color:#087f5b;font-weight:bold;">
+                </p>
+
+                <label>
+                    Your full name
+                </label>
+
+                <input id="customerName" type="text" placeholder="Enter your name">
+
+                <label>
+                    Phone number
+                </label>
+
+                <input id="customerPhone" type="tel" placeholder="+254...">
+
+                <label>
+                    Check in
+                </label>
+
+                <input id="modalCheckin" type="date">
+
+                <label>
+                    Check out
+                </label>
+
+                <input id="modalCheckout" type="date">
+
+                <button class="search-btn" onclick="submitBooking()">
+
+                    💬 Send Booking to WhatsApp
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <a class="floating-whatsapp"
+            href="https://wa.me/254112618748?text=Hello%20SafariGo,%20I%20would%20like%20to%20make%20a%20booking."
+            target="_blank" aria-label="Contact SafariGo on WhatsApp">
+
+            💬
+
+        </a>
+
+
+
+        <script>
+
+            const whatsappNumber = "254112618748";
+
+
+
+            function showStay() {
+
+                document.getElementById("stayForm").style.display = "block";
+
+                document.getElementById("rideForm").style.display = "none";
+
+                document.querySelectorAll(".tab")[0]
+                    .classList.add("active");
+
+                document.querySelectorAll(".tab")[1]
+                    .classList.remove("active");
+            }
+
+            function showRide() {
+
+                document.getElementById("stayForm").style.display = "none";
+
+                document.getElementById("rideForm").style.display = "block";
+
+                document.querySelectorAll(".tab")[0]
+                    .classList.remove("active");
+
+                document.querySelectorAll(".tab")[1]
+                    .classList.add("active");
+            }
+
+
+
+            function scrollToSection(id) {
+
+                const section = document.getElementById(id);
+
+                if (section) {
+
+                    section.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }
+            }
+
+
+
+            function searchStays() {
+
+                const destination =
+                    document.getElementById("destination").value.trim();
+
+                const checkin =
+                    document.getElementById("checkin").value;
+
+                const checkout =
+                    document.getElementById("checkout").value;
+
+                const guests =
+                    document.getElementById("guests").value;
+
+                if (!destination) {
+
+                    alert("Please enter your destination.");
+
+                    return;
+                }
+
+                let message =
+                    "Hello SafariGo!%0A%0A" +
+                    "I would like to find accommodation.%0A%0A" +
+                    "Destination: " + encodeURIComponent(destination) +
+                    "%0ACheck-in: " + encodeURIComponent(checkin || "Not specified") +
+                    "%0ACheck-out: " + encodeURIComponent(checkout || "Not specified") +
+                    "%0AGuests: " + encodeURIComponent(guests);
+
+                window.open(
+                    "https://wa.me/" + whatsappNumber + "?text=" + message,
+                    "_blank"
+                );
+            }
+
+
+
+            function bookRide() {
+
+                const pickup =
+                    document.getElementById("pickup").value.trim();
+
+                const dropoff =
+                    document.getElementById("dropoff").value.trim();
+
+                const rideDate =
+                    document.getElementById("rideDate").value;
+
+                const passengers =
+                    document.getElementById("passengers").value;
+
+                if (!pickup || !dropoff) {
+
+                    alert(
+                        "Please enter pickup and destination."
+                    );
+
+                    return;
+                }
+
+                const message =
+                    "Hello SafariGo!%0A%0A" +
+                    "I would like to book a ride.%0A%0A" +
+                    "Pickup: " +
+                    encodeURIComponent(pickup) +
+
+                    "%0ADestination: " +
+                    encodeURIComponent(dropoff) +
+
+                    "%0ADate: " +
+                    encodeURIComponent(rideDate || "Not specified") +
+
+                    "%0APassengers: " +
+                    encodeURIComponent(passengers);
+
+                window.open(
+                    "https://wa.me/" +
+                    whatsappNumber +
+                    "?text=" +
+                    message,
+                    "_blank"
+                );
+            }
+
+
+
+            function openBooking(property) {
+
+                document.getElementById("bookingModal")
+                    .style.display = "flex";
+
+                document.getElementById("selectedProperty")
+                    .innerText = property;
+
+            }
+
+            function closeModal() {
+
+                document.getElementById("bookingModal")
+                    .style.display = "none";
+
+            }
+
+
+
+            function submitBooking() {
+
+                const name =
+                    document.getElementById("customerName")
+                        .value.trim();
+
+                const phone =
+                    document.getElementById("customerPhone")
+                        .value.trim();
+
+                const checkin =
+                    document.getElementById("modalCheckin")
+                        .value;
+
+                const checkout =
+                    document.getElementById("modalCheckout")
+                        .value;
+
+                const property =
+                    document.getElementById("selectedProperty")
+                        .innerText;
+
+                if (!name || !phone) {
+
+                    alert(
+                        "Please enter your name and phone number."
+                    );
+
+                    return;
+                }
+
+                const message =
+                    "Hello SafariGo!%0A%0A" +
+
+                    "I would like to book accommodation.%0A%0A" +
+
+                    "Property: " +
+                    encodeURIComponent(property) +
+
+                    "%0AName: " +
+                    encodeURIComponent(name) +
+
+                    "%0APhone: " +
+                    encodeURIComponent(phone) +
+
+                    "%0ACheck-in: " +
+                    encodeURIComponent(checkin || "Not specified") +
+
+                    "%0ACheck-out: " +
+                    encodeURIComponent(checkout || "Not specified");
+
+                window.open(
+                    "https://wa.me/" +
+                    whatsappNumber +
+                    "?text=" +
+                    message,
+                    "_blank"
+                );
+
+                closeModal();
+
+            }
+
+
+
+            function openRide(type) {
+
+                showRide();
+
+                document.getElementById("rideForm")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                setTimeout(function () {
+
+                    const pickup =
+                        document.getElementById("pickup");
+
+                    if (pickup) {
+                        pickup.focus();
+                    }
+
+                }, 500);
+
+            }
+
+
+            window.addEventListener("click", function (event) {
+
+                const modal =
+                    document.getElementById("bookingModal");
+
+                if (event.target === modal) {
+
+                    closeModal();
+
+                }
+
+            });
+
+
+
+            const today =
+                new Date().toISOString().split("T")[0];
+
+            document.getElementById("checkin")
+                .setAttribute("min", today);
+
+            document.getElementById("checkout")
+                .setAttribute("min", today);
+
+            document.getElementById("rideDate")
+                .setAttribute("min", today);
+
+            document.getElementById("modalCheckin")
+                .setAttribute("min", today);
+
+            document.getElementById("modalCheckout")
+                .setAttribute("min", today);
+
+        </script>
+
+
+
+    </body>
+
+</html>
